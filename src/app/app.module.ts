@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';  
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -19,7 +19,7 @@ import { AddSequenceComponent } from './components/add-sequence/add-sequence.com
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    InMemoryWebApiModule.forRoot(DataService),
+    HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false }),
     HttpClientModule
   ],
   providers: [],

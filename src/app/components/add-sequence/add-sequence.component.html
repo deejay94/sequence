@@ -1,23 +1,31 @@
 <div class="card">
-    <div class="card-body">
-      <form [formGroup]="sequenceForm" (ngSubmit)="submit()">
-        <div class="form-group">
-          <label class="col-md-4">Name</label>
-          <input type="text" class="form-control" formControlName="name" #name />
-        </div>
-        <div class="form-group">
-          <label class="col-md-4">Description</label>
-          <input type="text" class="form-control" formControlName="description" #description />
-        </div>
-        <div class="form-group">
-          <label class="col-md-4">DNA Sequence</label>
-          <input type="text" class="form-control" formControlName="dnaSequence" #dnaSequence />
-        </div>
-        <div class="form-group">
-          <button type="submit" 
-          [disabled]="sequenceForm.pristine || sequenceForm.invalid" 
-          class="btn btn-primary">Add Sequence</button>
-        </div>
-      </form>
-    </div>
+  <div class="card-body">
+    <form [formGroup]="sequenceForm" (ngSubmit)="createSequence(sequenceForm.value)">
+      <div class="form-group">
+        <label class="col-md-4">Name</label>
+        <input type="text" class="form-control" formControlName="name" #name />
+      </div>
+      <div *ngIf="isSubmitted && formControls.name.errors" class="alert alert-danger">
+        <div *ngIf="formControls.name.errors.required">Name is required</div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Description</label>
+        <input type="text" class="form-control" formControlName="description" #description />
+      </div>
+      <div *ngIf="isSubmitted && formControls.description.errors" class="alert alert-danger">
+        <div *ngIf="formControls.description.errors.required">Description is required</div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">DNA Sequence</label>
+        <input type="text" class="form-control" formControlName="dnaSequence" #dnaSequence />
+      </div>
+      <div *ngIf="isSubmitted && formControls.dnaSequence.errors" class="alert alert-danger">
+        <div *ngIf="isSubmitted && formControls.dnaSequence.errors.required">Sequence is required</div>
+        <div *ngIf="isSubmitted && formControls.dnaSequence.errors.pattern">Sequence must only contain T,A,C, and G</div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Sequence</button>
+      </div>
+    </form>
   </div>
+</div>
