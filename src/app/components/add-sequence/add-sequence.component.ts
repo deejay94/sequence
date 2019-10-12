@@ -32,12 +32,18 @@ export class AddSequenceComponent implements OnInit {
       return;
     }
 
+    this.sequenceService.getSequences().subscribe((res: any[]) => {
+      res.map(ele => {
+        if (ele.dnaSequence == sequence.dnaSequence) {
+          this.sequenceForm.controls['dnaSequence'].setErrors({ 'unique': true });
+          return
+        }
+      })
+    })
+
     this.sequenceService.createSequence(sequence).subscribe((ret) => {
       sequence.id = this.dataService.genId(this.sequences)
       this.sequences.push(sequence);
-      console.log(ret);
-      
     })
   }
-
 }

@@ -12,6 +12,10 @@ export class SequenceService {
 
   constructor(private httpClient: HttpClient) { }
 
+  public getSequences() {
+    return this.httpClient.get(`${this.SERVER_URL + 'sequences'}`)
+  }
+
 
   public createSequence(sequence) {
     return this.httpClient.post(`${this.SERVER_URL + 'sequences'}`, sequence)

@@ -22,6 +22,7 @@
       <div *ngIf="isSubmitted && formControls.dnaSequence.errors" class="alert alert-danger">
         <div *ngIf="isSubmitted && formControls.dnaSequence.errors.required">Sequence is required</div>
         <div *ngIf="isSubmitted && formControls.dnaSequence.errors.pattern">Sequence must only contain T,A,C, and G</div>
+        <div *ngIf="isSubmitted && formControls.dnaSequence.errors.unique">Sequence must be unique</div>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Add Sequence</button>
