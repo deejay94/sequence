@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { SequenceService } from 'src/app/services/sequence.service';
 import { DataService } from 'src/app/services/data.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-add-sequence',
@@ -14,36 +15,47 @@ export class AddSequenceComponent implements OnInit {
   isSubmitted = false;
   sequences: any[] = [];
 
-  constructor(private dataService: DataService, private formBuilder: FormBuilder, private sequenceService: SequenceService) { }
+  constructor(private notifierService: NotifierService, private dataService: DataService,
+     private formBuilder: FormBuilder, private sequenceService: SequenceService) { }
 
   ngOnInit() {
     this.sequenceForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      dnaSequence: ['', [Validators.required, Validators.pattern('^[TtAaCcGg]*$')]]
+      name: [''],
+      description: [''],
+      dnaSequence: ['', [Validators.pattern('^[TtAaCcGg]*$')]]
     });
   }
 
   get formControls() { return this.sequenceForm.controls; }
 
+  public getSequences() {
+    this.sequenceService.getSequences().subscribe((data: any[]) => {
+      this.sequences = data
+    })
+  }
+
   public createSequence(sequence) {
     this.isSubmitted = true;
-    if (this.sequenceForm.invalid) {
+
+    this.isUnique(sequence)
+
+    if (this.sequenceForm.invalid) {      
       return;
     }
 
-    this.sequenceService.getSequences().subscribe((res: any[]) => {
-      res.map(ele => {
-        if (ele.dnaSequence == sequence.dnaSequence) {
-          this.sequenceForm.controls['dnaSequence'].setErrors({ 'unique': true });
-          return
-        }
+    this.sequenceService.createSequence(sequence).subscribe(() => {
+      this.isSubmitted = false;
+      sequence.id = this.dataService.genId(this.sequences)           
+      this.sequences.push(sequence)
+      this.notifierService.notify('success', 'Sequence successfully created!')
       })
-    })
+  }
 
-    this.sequenceService.createSequence(sequence).subscribe((ret) => {
-      sequence.id = this.dataService.genId(this.sequences)
-      this.sequences.push(sequence);
+  public isUnique(sequence) {
+    this.sequences.map(ele => {
+      if (sequence['dnaSequence'] == ele.dnaSequence) {
+        this.sequenceForm.controls['dnaSequence'].setErrors({'duplicate': true})
+      }
     })
   }
 }

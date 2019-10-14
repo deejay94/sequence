@@ -1,0 +1,13 @@
+<h1>Sequence List</h1>
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>DNA Sequence</th>
+  </tr>
+  <tr *ngFor="let sequence of sequences" >
+    <td>{{ sequence.name | uppercase }}</td>
+    <td>{{ sequence.description | uppercase }}</td>
+    <td>{{ sequence.dnaSequence | uppercase }}</td>
+  </tr>
+</table>
