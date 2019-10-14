@@ -4,15 +4,37 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddSequenceComponent } from './components/add-sequence/add-sequence.component';
+import { SequenceListComponent } from './components/sequence-list/sequence-list.component';
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'middle',
+      distance: 12
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10
+    }
+  },
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    showDismissButton: true,
+  }
+};
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddSequenceComponent
+    AddSequenceComponent,
+    SequenceListComponent
   ],
   imports: [
     BrowserModule,
@@ -20,8 +42,8 @@ import { AddSequenceComponent } from './components/add-sequence/add-sequence.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false }),
-    HttpClientModule
-  ],
+    HttpClientModule,
+    NotifierModule.withConfig(customNotifierOptions)  ],
   providers: [],
   bootstrap: [AppComponent]
 })
