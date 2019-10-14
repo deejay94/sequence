@@ -5,6 +5,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import {DataTableModule} from "angular-6-datatable";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,7 +44,9 @@ const customNotifierOptions: NotifierOptions = {
     ReactiveFormsModule,
     HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false }),
     HttpClientModule,
-    NotifierModule.withConfig(customNotifierOptions)  ],
+    NotifierModule.withConfig(customNotifierOptions),
+    DataTableModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

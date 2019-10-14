@@ -1,27 +1,32 @@
-<div class="card">
-  <div class="card-body">
-    <form [formGroup]="sequenceForm" (ngSubmit)="createSequence(sequenceForm.value)">
-      <div class="form-group">
-        <label class="col-md-4">Name</label>
-        <input type="text" class="form-control" formControlName="name" #name />
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="sequenceForm" (ngSubmit)="createSequence(sequenceForm.value)">
+          <div class="form-group">
+            <label class="col-md-4">Name</label>
+            <input type="text" class="form-control" formControlName="name" #name />
+          </div>
+          <div class="form-group">
+            <label class="col-md-4">Description</label>
+            <input type="text" class="form-control" formControlName="description" #description />
+          </div>
+          <div class="form-group">
+            <label class="col-md-4">DNA Sequence</label>
+            <input type="text" class="form-control" formControlName="dnaSequence" #dnaSequence />
+          </div>
+          <div *ngIf="isSubmitted && formControls.dnaSequence.errors" class="alert alert-danger">
+            <div *ngIf="isSubmitted && formControls.dnaSequence.errors.pattern">Sequence must only contain T,A,C, and G</div>
+            <div *ngIf="isSubmitted && formControls.dnaSequence.errors.duplicate">Sequence must be unique</div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Add Sequence</button>
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <label class="col-md-4">Description</label>
-        <input type="text" class="form-control" formControlName="description" #description />
-      </div>
-      <div class="form-group">
-        <label class="col-md-4">DNA Sequence</label>
-        <input type="text" class="form-control" formControlName="dnaSequence" #dnaSequence />
-      </div>
-      <div *ngIf="isSubmitted && formControls.dnaSequence.errors" class="alert alert-danger">
-        <div *ngIf="isSubmitted && formControls.dnaSequence.errors.pattern">Sequence must only contain T,A,C, and G</div>
-        <div *ngIf="isSubmitted && formControls.dnaSequence.errors.duplicate">Sequence must be unique</div>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Add Sequence</button>
-      </div>
-    </form>
+    </div>
+  </div>
+  <div class="column">
+    <app-sequence-list [sequences] = "sequences"></app-sequence-list>
   </div>
 </div>
-
-<app-sequence-list [sequences] = "sequences"></app-sequence-list>
