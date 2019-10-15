@@ -1,22 +1,13 @@
-<table class="table table-striped" [mfData]="sequences" #mf="mfDataTable">
-  <thead>
+<h1>Sequence List</h1>
+<table style="width:100%">
   <tr>
-      <th>
-          <mfDefaultSorter by="name">Name</mfDefaultSorter>
-      </th>
-      <th>
-          <mfDefaultSorter>Description</mfDefaultSorter>
-      </th>
-      <th>
-          <mfDefaultSorter>DNA Sequence</mfDefaultSorter>
-      </th>
+    <th (click)="sortName()" class="name">Name<i *ngIf="up" class="fa fa-arrow-up"></i><i *ngIf="down" class="fa fa-arrow-down"></i></th>
+    <th>Description</th>
+    <th>DNA Sequence</th>
   </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let sequence of mf.data">
-      <td>{{sequence.name | uppercase }}</td>
-      <td>{{sequence.description | uppercase }}</td>
-      <td>{{sequence.dnaSequence | uppercase | slice:0:4 }}<span *ngIf="sequence.dnaSequence.length > 5">...</span></td>
-  </tr>
-  </tbody>
+  <tr *ngFor="let sequence of sequences">
+    <td>{{sequence.name | uppercase }}</td>
+    <td>{{sequence.description | uppercase }}</td>
+    <td>{{sequence.dnaSequence | uppercase | slice:0:4 }}<span *ngIf="sequence.dnaSequence.length > 5">...</span></td>
+</tr>
 </table>
