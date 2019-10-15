@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as _ from "lodash";
+
 @Component({
   selector: 'app-sequence-list',
   templateUrl: './sequence-list.component.html',
@@ -10,9 +11,10 @@ import * as _ from "lodash";
 export class SequenceListComponent {
 
   @Input() sequences
-  counter = 0
-  up: boolean
-  down: boolean
+  public counter = 0
+  public up: boolean
+  public down: boolean
+
 
   constructor() { }
 

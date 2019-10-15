@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddSequenceComponent } from './components/add-sequence/add-sequence.component';
 import { SequenceListComponent } from './components/sequence-list/sequence-list.component';
+import { SearchPipe } from './grd-filter.pipe';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -34,7 +35,8 @@ const customNotifierOptions: NotifierOptions = {
   declarations: [
     AppComponent,
     AddSequenceComponent,
-    SequenceListComponent
+    SequenceListComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

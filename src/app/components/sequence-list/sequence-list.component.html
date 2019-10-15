@@ -1,11 +1,12 @@
 <h1>Sequence List</h1>
-<table style="width:100%">
+<table id="table" style="width:100%">
+  <input [(ngModel)]="query"/>
   <tr>
     <th (click)="sortName()" class="name">Name<i *ngIf="up" class="fa fa-arrow-up"></i><i *ngIf="down" class="fa fa-arrow-down"></i></th>
     <th>Description</th>
     <th>DNA Sequence</th>
   </tr>
-  <tr *ngFor="let sequence of sequences">
+  <tr *ngFor="let sequence of sequences | search:'name':query">
     <td>{{sequence.name | uppercase }}</td>
     <td>{{sequence.description | uppercase }}</td>
     <td>{{sequence.dnaSequence | uppercase | slice:0:4 }}<span *ngIf="sequence.dnaSequence.length > 5">...</span></td>
