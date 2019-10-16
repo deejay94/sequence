@@ -48,6 +48,7 @@ export class AddSequenceComponent implements OnInit {
       sequence.id = this.dataService.genId(this.sequences)           
       this.sequences.push(sequence)
       this.notifierService.notify('success', 'Sequence successfully created!')
+      this.sequenceForm.reset()
       })
   }
 

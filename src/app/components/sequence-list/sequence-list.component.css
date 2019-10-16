@@ -1,3 +1,37 @@
 .name {
     cursor: pointer;
 }
+
+.modal-body {
+    word-wrap: break-word;
+}
+  
+td.long {
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    width: 50px;
+    border:solid 1px black;
+  }
+
+td.long:hover {
+    color: #0000FF;
+    cursor: pointer
+  }
+
+table {
+      border-collapse:collapse; 
+      table-layout:fixed; 
+      width:100%;
+    }
+
+table th,td.break {
+        width:100px; 
+        word-wrap:break-word;
+        text-overflow: ellipsis;
+        border:solid 1px black;
+    }
+
+input {
+    margin-bottom: 20px;
+}
+

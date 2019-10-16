@@ -1,14 +1,52 @@
 <h1>Sequence List</h1>
-<table id="table" style="width:100%">
-  <input [(ngModel)]="query"/>
+<table>
+  <input placeholder="Search for a name" [(ngModel)]="query"/>
   <tr>
     <th (click)="sortName()" class="name">Name<i *ngIf="up" class="fa fa-arrow-up"></i><i *ngIf="down" class="fa fa-arrow-down"></i></th>
     <th>Description</th>
     <th>DNA Sequence</th>
   </tr>
   <tr *ngFor="let sequence of sequences | search:'name':query">
-    <td>{{sequence.name | uppercase }}</td>
-    <td>{{sequence.description | uppercase }}</td>
-    <td>{{sequence.dnaSequence | uppercase | slice:0:4 }}<span *ngIf="sequence.dnaSequence.length > 5">...</span></td>
+    <td class="break">{{ sequence.name | uppercase }}</td>
+    <td class="break">{{ sequence.description | uppercase }}</td>
+    <td (click)="showSequence($event)" class="long" data-toggle="modal" data-target="#fullSequence">{{ sequence.dnaSequence | uppercase }}</td>
 </tr>
 </table>
+
+<div class="modal fade" id="fullSequence" tabindex="-1" role="dialog" aria-labelledby="fullSequenceTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fullSequenceTitle">DNA Sequence</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       {{ dna }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <table>
+  <tr>
+     <td>1</td>
+     <td>Lorem Ipsum</td>
+     <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </td>
+  </tr>
+  <tr>
+     <td>2</td>
+     <td>LoremIpsumhasbeentheindustry'sstandarddummytexteversincethe1500s,whenanunknown</td>
+     <td>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+  </tr>
+  <tr>
+     <td>3</td>
+     <td></td>
+     <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</td>
+  </tr>
+</table> -->

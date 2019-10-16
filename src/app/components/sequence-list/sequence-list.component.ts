@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import * as _ from "lodash";
+declare var $ : any;
+
 
 @Component({
   selector: 'app-sequence-list',
@@ -14,6 +16,7 @@ export class SequenceListComponent {
   public counter = 0
   public up: boolean
   public down: boolean
+  public dna;
 
 
   constructor() { }
@@ -33,5 +36,9 @@ export class SequenceListComponent {
       this.counter++
     }
     
+  }
+
+  showSequence(e) {        
+     this.dna = e.target.innerHTML
   }
 }
