@@ -16,8 +16,8 @@ export class SequenceListComponent {
   public counter = 0
   public up: boolean
   public down: boolean
-  public dna;
-
+  public text;
+  public dna = "";
 
   constructor() { }
 
@@ -39,6 +39,19 @@ export class SequenceListComponent {
   }
 
   showSequence(e) {        
-     this.dna = e.target.innerHTML
+     this.text = e.target.innerHTML
+     for (let i = 0; i < this.text.length; i++) {
+      this.dna += "<span style=\"color:" + this.getRandomColor() + ";\">" + this.text[i] + "</span>"
+     }
+     document.getElementById("modalbody").innerHTML=this.dna;
+  }
+
+  getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 }
