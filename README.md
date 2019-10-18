@@ -1,6 +1,6 @@
 # Prerequisites
 
-- Install he latest version of node.js
+- Install the latest version of node.js
 - Install Angular Cli
 
 ## Development server
