@@ -25,14 +25,14 @@ export class SequenceListComponent {
     if(this.counter % 2 === 0) {
       const data = _.orderBy(this.sequences, ['name'], ['asc'])
       this.sequences = data
-      this.up = false
-      this.down = true
+      this.up = true
+      this.down = false
       this.counter++
     } else {
       const data = _.orderBy(this.sequences, ['name'], ['desc'])
       this.sequences = data
-      this.up = true
-      this.down = false
+      this.up = false
+      this.down = true
       this.counter++
     }
     
